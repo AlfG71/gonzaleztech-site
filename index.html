@@ -20,29 +20,35 @@
 
     /* ─── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg:         #F4F1EB;
-      --ink:        #0C0E0D;
-      --ink2:       rgba(12,14,13,0.46);
-      --ink3:       rgba(12,14,13,0.07);
-      --teal:       #1A9E87;
-      --teal-glow:  rgba(26,158,135,0.09);
-      --teal-border:rgba(26,158,135,0.22);
-      --card:       #FFFFFF;
-      --sep:        rgba(12,14,13,0.08);
-      --radius:     8px;
+      /* Default: DARK — Plum base with Fuchsia + Mint accents */
+      --bg:          #1A0A2E;
+      --ink:         #EDE8F5;
+      --ink2:        rgba(237,232,245,0.5);
+      --ink3:        rgba(237,232,245,0.06);
+      --teal:        #7DC98A;
+      --teal-glow:   rgba(125,201,138,0.1);
+      --teal-border: rgba(125,201,138,0.28);
+      --fuchsia:     #E91E8C;
+      --fuchsia-glow:rgba(233,30,140,0.1);
+      --card:        #2A1545;
+      --sep:         rgba(237,232,245,0.08);
+      --radius:      8px;
     }
 
-    @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: light) {
       :root {
-        --bg:         #0B0D0C;
-        --ink:        #E8E4DC;
-        --ink2:       rgba(232,228,220,0.46);
-        --ink3:       rgba(232,228,220,0.06);
-        --teal:       #2ABFAA;
-        --teal-glow:  rgba(42,191,170,0.08);
-        --teal-border:rgba(42,191,170,0.22);
-        --card:       #131614;
-        --sep:        rgba(232,228,220,0.08);
+        /* Light fallback for users with light OS setting */
+        --bg:          #F7F4F9;
+        --ink:         #1A0A2E;
+        --ink2:        rgba(26,10,46,0.5);
+        --ink3:        rgba(26,10,46,0.07);
+        --teal:        #7DC98A;
+        --teal-glow:   rgba(125,201,138,0.12);
+        --teal-border: rgba(125,201,138,0.32);
+        --fuchsia:     #E91E8C;
+        --fuchsia-glow:rgba(233,30,140,0.08);
+        --card:        #FFFFFF;
+        --sep:         rgba(26,10,46,0.09);
       }
     }
 
@@ -96,7 +102,7 @@
       text-transform: uppercase;
       color: var(--ink);
     }
-    .nav-logo span { color: var(--teal); }
+    .nav-logo span { color: var(--fuchsia); }
 
     .nav-links {
       display: flex;
@@ -159,7 +165,7 @@
       width: 500px;
       height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--teal-glow) 0%, transparent 68%);
+      background: radial-gradient(circle, var(--fuchsia-glow) 0%, transparent 68%);
       pointer-events: none;
       animation: orbFloat 9s ease-in-out infinite;
     }
@@ -173,7 +179,7 @@
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--fuchsia);
       margin-bottom: 1.2rem;
       display: flex;
       align-items: center;
@@ -183,7 +189,7 @@
       content: '';
       width: 20px;
       height: 1px;
-      background: var(--teal);
+      background: var(--fuchsia);
     }
 
     .hero-title {
@@ -197,7 +203,7 @@
       margin-bottom: 1rem;
       transition: color 0.4s;
     }
-    .hero-title .accent { color: var(--teal); }
+    .hero-title .accent { color: var(--fuchsia); }
 
     .hero-subtitle {
       font-family: 'Fraunces', serif;
@@ -255,7 +261,7 @@
       font-size: 9px;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--ink2);
+      color: var(--fuchsia);
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
@@ -328,7 +334,7 @@
       margin-bottom: 1rem;
       transition: color 0.4s;
     }
-    .about-head em { font-style: italic; color: var(--teal); }
+    .about-head em { font-style: italic; color: var(--fuchsia); }
 
     .about-body { font-size: 13px; line-height: 1.84; color: var(--ink2); }
 
@@ -464,7 +470,7 @@
       color: var(--ink);
       transition: color 0.4s;
     }
-    .contact-hed span { color: var(--teal); }
+    .contact-hed span { color: var(--fuchsia); }
 
     .contact-sub { font-size: 13px; color: var(--ink2); margin-top: 0.5rem; }
 
@@ -551,7 +557,7 @@
     }
 
     .footer-copy { font-size: 10px; color: var(--ink2); }
-    .footer-copy a { color: var(--teal); }
+    .footer-copy a { color: var(--fuchsia); }
 
     .footer-right {
       display: flex;
@@ -605,7 +611,7 @@
     <div class="nav-logo">Gonz<span>Tech</span>PR</div>
     <ul class="nav-links">
       <li><a href="#services" data-en="Services" data-es="Servicios">Services</a></li>
-      <li><a href="#about"    data-en="About"    data-es="Sobre Nosotros">About</a></li>
+      <li><a href="#about"    data-en="About"    data-es="Acerca">About</a></li>
       <li><a href="#work"     data-en="Work"     data-es="Proyectos">Work</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:0.7rem;">
@@ -615,7 +621,7 @@
         <span id="langTxt">ES</span>
       </button>
       -->
-      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Comencemos">Start a project</button>
+      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Iniciemos">Start a project</button>
     </div>
   </nav>
 
@@ -625,7 +631,7 @@
 
     <p class="hero-eyebrow"
       data-en="Serious software for serious operations"
-      data-es="Software serio para operaciones importantes">
+      data-es="Software serio para operaciones que importan">
       Serious software for serious operations
     </p>
 
@@ -641,19 +647,19 @@
 
     <p class="hero-body"
       data-en="GonzalezTech builds custom software and strategy for businesses that run on real-world complexity — from the Caribbean to the Pacific Northwest."
-      data-es="GonzalezTech construye software y estrategia para negocios que operan en entornos exigentes — desde el Caribe hasta el PNW.">
+      data-es="GonzalezTech construye software y estrategia para negocios que operan en entornos exigentes — desde el Caribe hasta el Pacífico Noroeste.">
       GonzalezTech builds custom software and strategy for businesses that run on real-world complexity — from the Caribbean to the Pacific Northwest.
     </p>
 
     <div class="hero-actions">
-      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Comencemos">Start a project</button>
+      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Iniciemos">Start a project</button>
       <button class="btn-ghost   mag" onclick="(function(){var navH=document.querySelector('.nav').offsetHeight;var t=document.getElementById('work').getBoundingClientRect().top+window.scrollY-navH-16;window.scrollTo({top:t,behavior:'smooth'});})()" data-en="See our work" data-es="Ver proyectos">See our work</button>
     </div>
 
     <div class="hero-corner" aria-hidden="true">
       <span class="hero-corner-val" data-en="Caribbean"         data-es="Caribe">Caribbean</span>
       <span class="hero-corner-sep">·</span>
-      <span class="hero-corner-val" data-en="Pacific Northwest"  data-es="PNW">Pacific Northwest</span>
+      <span class="hero-corner-val" data-en="Pacific Northwest"  data-es="Pacífico Noroeste">Pacific Northwest</span>
       <span class="hero-corner-sep">·</span>
       <span class="hero-corner-val" data-en="Service industries" data-es="Industrias de servicio">Service industries</span>
     </div>
@@ -666,20 +672,20 @@
 
       <div class="svc-card">
         <div class="svc-icon"><i class="ti ti-device-laptop"></i></div>
-        <div class="svc-title" data-en="Custom software"    data-es="Software personalizado">Custom software</div>
+        <div class="svc-title" data-en="Custom software"    data-es="Software a medida">Custom software</div>
         <div class="svc-desc"  data-en="Purpose-built platforms for your operations — not templates, not shortcuts." data-es="Plataformas diseñadas para tu operación. Sin plantillas, sin atajos.">Purpose-built platforms for your operations — not templates, not shortcuts.</div>
       </div>
 
       <div class="svc-card">
         <div class="svc-icon"><i class="ti ti-chart-dots-3"></i></div>
-        <div class="svc-title" data-en="Business consulting" data-es="Consultoría de negocios">Business consulting</div>
-        <div class="svc-desc"  data-en="Strategy and systems thinking grounded in real industry experience." data-es="Combinamos pensamiento sistémico y vision estratégica con experiencia profunda de la industria, para construir software de real impacto para tu negocio.">Strategy and systems thinking grounded in real industry experience.</div>
+        <div class="svc-title" data-en="Business consulting" data-es="Consultoría">Business consulting</div>
+        <div class="svc-desc"  data-en="Strategy and systems thinking grounded in real industry experience." data-es="Estrategia y pensamiento sistémico con experiencia real de industria.">Strategy and systems thinking grounded in real industry experience.</div>
       </div>
 
       <div class="svc-card">
         <div class="svc-icon"><i class="ti ti-cpu"></i></div>
         <div class="svc-title" data-en="Intelligent systems"  data-es="Sistemas inteligentes">Intelligent systems</div>
-        <div class="svc-desc"  data-en="Software that gets smarter the longer it runs in your operation — built from real client work, not speculation." data-es="Software que mejora con cada proyecto, forjado en la experiencia real con nuestros clientes.">Software that gets smarter the longer it runs in your operation — built from real client work, not speculation.</div>
+        <div class="svc-desc"  data-en="Software that gets smarter the longer it runs in your operation — built from real client work, not speculation." data-es="Software que mejora con el tiempo, construido desde trabajo real con clientes.">Software that gets smarter the longer it runs in your operation — built from real client work, not speculation.</div>
       </div>
 
     </div>
@@ -719,7 +725,7 @@
           <i class="pillar-icon ti ti-atom-2"></i>
           <div>
             <div class="pillar-name" data-en="Systems thinking" data-es="Pensamiento sistémico">Systems thinking</div>
-            <div class="pillar-note" data-en="Trained to observe complex systems, find patterns, and solve the right problem." data-es="Analizamos sistemas complejos, encontramos patrones y resolvemos el problema correcto.">Trained to observe complex systems, find patterns, and solve the right problem.</div>
+            <div class="pillar-note" data-en="Trained to observe complex systems, find patterns, and solve the right problem." data-es="Entrenado para observar sistemas complejos, encontrar patrones y resolver el problema correcto.">Trained to observe complex systems, find patterns, and solve the right problem.</div>
           </div>
         </div>
       </div>
@@ -732,9 +738,9 @@
     <div class="case">
       <div class="case-body">
         <div>
-          <span class="case-badge" data-en="In progress · Puerto Rico · Marine Boatyard" data-es="En progreso · Puerto Rico · Varadero">In progress · Puerto Rico · Marine Boatyard</span>
-          <div class="case-title" data-en="Marine Boatyard operations platform" data-es="Plataforma de operaciones para varadero">Marine Boatyard operations platform</div>
-          <div class="case-desc"  data-en="Job tracking, customer notifications, and inventory for a family boatyard. Architected as a multi-tenant Caribbean marine platform from day one." data-es="Seguimiento de trabajos, notificaciones y control de inventario para un varadero operado por una familia. Arquitectura multi-tenant desde el primer día.">Job tracking, customer notifications, and inventory for a 10-person boatyard. Architected as a multi-tenant Caribbean marine platform from day one.</div>
+          <span class="case-badge" data-en="In progress · Puerto Rico · Marine Boatyard" data-es="En progreso · Puerto Rico · Astillero">In progress · Puerto Rico · Marine Boatyard</span>
+          <div class="case-title" data-en="Marine Boatyard operations platform" data-es="Plataforma de operaciones para astillero">Marine Boatyard operations platform</div>
+          <div class="case-desc"  data-en="Job tracking, customer notifications, and inventory for a 10-person boatyard. Architected as a multi-tenant Caribbean marine platform from day one." data-es="Seguimiento de trabajos, notificaciones y control de inventario para un astillero de 10 personas. Arquitectura multi-tenant desde el primer día.">Job tracking, customer notifications, and inventory for a 10-person boatyard. Architected as a multi-tenant Caribbean marine platform from day one.</div>
         </div>
         <div class="case-meta">
           <div class="meta">
@@ -760,7 +766,7 @@
         </div>
         <div class="contact-sub"
           data-en="Direct line to the person doing the work."
-          data-es="Línea directa con el desarroallador del proyecto.">
+          data-es="Línea directa con quien hace el trabajo.">
           Direct line to the person doing the work.
         </div>
       </div>
