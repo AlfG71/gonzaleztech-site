@@ -609,10 +609,12 @@
       <li><a href="#work"     data-en="Work"     data-es="Proyectos">Work</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:0.7rem;">
+      <!-- Language toggle disabled until Spanish copy is finalised
       <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
         <i class="ti ti-language"></i>
         <span id="langTxt">ES</span>
       </button>
+      -->
       <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Iniciemos">Start a project</button>
     </div>
   </nav>
@@ -869,17 +871,22 @@
     var formOpen = false;
 
     function openForm() {
+      var wrap = document.getElementById('formWrap');
+      var navH = document.querySelector('.nav').offsetHeight;
+
       if (!formOpen) {
         formOpen = true;
-        document.getElementById('formWrap').classList.add('open');
-      }
-      // Always scroll to form whether it was already open or just opened
-      setTimeout(function() {
-        var navH  = document.querySelector('.nav').offsetHeight;
-        var wrap  = document.getElementById('formWrap');
-        var top   = wrap.getBoundingClientRect().top + window.scrollY - navH - 24;
+        wrap.classList.add('open');
+        // Wait for the CSS max-height transition to finish (550ms) then scroll
+        setTimeout(function() {
+          var top = wrap.getBoundingClientRect().top + window.scrollY - navH - 24;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }, 560);
+      } else {
+        // Form already open — scroll immediately
+        var top = wrap.getBoundingClientRect().top + window.scrollY - navH - 24;
         window.scrollTo({ top: top, behavior: 'smooth' });
-      }, 80);
+      }
     }
 
     function closeForm() {
