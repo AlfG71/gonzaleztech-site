@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GonzalezTech — Software strategy for any industry</title>
+  <meta name="description" content="GonzalezTech builds custom software and strategy for businesses that run on real-world complexity — from the Caribbean to the Pacific Northwest." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&family=Epilogue:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  <style>
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:         #F4F1EB;
+      --ink:        #0C0E0D;
+      --ink2:       rgba(12,14,13,0.46);
+      --ink3:       rgba(12,14,13,0.07);
+      --teal:       #1A9E87;
+      --teal-glow:  rgba(26,158,135,0.09);
+      --teal-border:rgba(26,158,135,0.22);
+      --card:       #FFFFFF;
+      --sep:        rgba(12,14,13,0.08);
+      --radius:     8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:         #0B0D0C;
+        --ink:        #E8E4DC;
+        --ink2:       rgba(232,228,220,0.46);
+        --ink3:       rgba(232,228,220,0.06);
+        --teal:       #2ABFAA;
+        --teal-glow:  rgba(42,191,170,0.08);
+        --teal-border:rgba(42,191,170,0.22);
+        --card:       #131614;
+        --sep:        rgba(232,228,220,0.08);
+      }
+    }
+
+    /* ─── BASE ───────────────────────────────────────────── */
+    body {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      transition: background 0.4s, color 0.4s;
+      overflow-x: hidden;
+    }
+
+    /* ─── LANG TOGGLE (inline in nav) ───────────────────── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Epilogue', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      background: transparent;
+      border: 0.5px solid var(--sep);
+      border-radius: 20px;
+      padding: 0.28rem 0.7rem;
+      transition: all 0.2s;
+    }
+    .lang-toggle:hover { color: var(--teal); border-color: var(--teal-border); }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 2.4rem;
+      border-bottom: 0.5px solid var(--sep);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      transition: background 0.4s;
+    }
+
+    .nav-logo {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--ink2);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn-primary {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--teal);
+      border: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 2px;
+      transition: opacity 0.2s, transform 0.15s;
+      will-change: transform;
+    }
+    .btn-primary:hover { opacity: 0.86; }
+
+    .btn-ghost {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      background: transparent;
+      border: 0.5px solid var(--sep);
+      padding: 0.5rem 1.1rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+      will-change: transform;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink2); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      padding: 5.5rem 2.4rem 5rem;
+      position: relative;
+      border-bottom: 0.5px solid var(--sep);
+      overflow: hidden;
+      min-height: 480px;
+    }
+
+    .hero-orb {
+      position: absolute;
+      top: -80px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--teal-glow) 0%, transparent 68%);
+      pointer-events: none;
+      animation: orbFloat 9s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%       { transform: translate(-20px, 16px) scale(1.06); }
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      max-width: 600px;
+      margin-bottom: 1rem;
+      transition: color 0.4s;
+    }
+    .hero-title .accent { color: var(--teal); }
+
+    .hero-subtitle {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.5;
+      color: var(--ink2);
+      max-width: 480px;
+      margin-bottom: 1.4rem;
+      transition: color 0.4s;
+    }
+
+    .hero-body {
+      font-size: 14px;
+      line-height: 1.82;
+      color: var(--ink2);
+      max-width: 440px;
+      margin-bottom: 2.4rem;
+      transition: color 0.4s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .hero-corner {
+      position: absolute;
+      right: 2.4rem;
+      bottom: 4rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .hero-corner-val {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink2);
+    }
+
+    .hero-corner-sep {
+      font-size: 14px;
+      color: var(--teal);
+      opacity: 0.4;
+    }
+
+    /* ─── SECTION SHARED ─────────────────────────────────── */
+    .section { padding: 3rem 2.4rem; border-bottom: 0.5px solid var(--sep); }
+
+    .sec-label {
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--sep);
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────── */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .svc-card {
+      background: var(--card);
+      border: 0.5px solid var(--sep);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--teal);
+      transition: width 0.35s ease;
+    }
+    .svc-card:hover::after { width: 100%; }
+    .svc-card:hover {
+      border-color: var(--teal-border);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px var(--teal-glow);
+    }
+
+    .svc-icon { font-size: 22px; color: var(--teal); margin-bottom: 1rem; }
+
+    .svc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      transition: color 0.4s;
+    }
+
+    .svc-desc { font-size: 12px; line-height: 1.7; color: var(--ink2); }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3.5rem;
+    }
+
+    .about-head {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1.14;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      transition: color 0.4s;
+    }
+    .about-head em { font-style: italic; color: var(--teal); }
+
+    .about-body { font-size: 13px; line-height: 1.84; color: var(--ink2); }
+
+    .pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--sep);
+      border: 0.5px solid var(--sep);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .pillar {
+      background: var(--card);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: background 0.22s, transform 0.22s;
+    }
+    .pillar:hover { background: var(--teal-glow); transform: translateX(3px); }
+
+    .pillar-icon { font-size: 17px; color: var(--teal); min-width: 20px; margin-top: 2px; }
+
+    .pillar-name {
+      font-family: 'Fraunces', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+      transition: color 0.4s;
+    }
+
+    .pillar-note { font-size: 12px; line-height: 1.58; color: var(--ink2); }
+
+    /* ─── WORK ───────────────────────────────────────────── */
+    .case {
+      background: var(--card);
+      border: 0.5px solid var(--teal-border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .case:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px var(--teal-glow);
+    }
+    .case::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--teal);
+    }
+
+    .case-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .case-badge {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-glow);
+      border: 0.5px solid var(--teal-border);
+      padding: 0.22rem 0.6rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 0.7rem;
+    }
+
+    .case-title {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      transition: color 0.4s;
+    }
+
+    .case-desc { font-size: 12px; line-height: 1.74; color: var(--ink2); max-width: 400px; }
+
+    .case-meta { display: flex; gap: 1rem; }
+
+    .meta {
+      text-align: center;
+      padding: 0.8rem 1rem;
+      background: var(--teal-glow);
+      border: 0.5px solid var(--teal-border);
+      border-radius: 6px;
+      min-width: 84px;
+    }
+
+    .meta-val {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--teal);
+      display: block;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+
+    .meta-key {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink2);
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .contact-hed {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 32px;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--ink);
+      transition: color 0.4s;
+    }
+    .contact-hed span { color: var(--teal); }
+
+    .contact-sub { font-size: 13px; color: var(--ink2); margin-top: 0.5rem; }
+
+    .contact-actions { display: flex; gap: 0.8rem; flex-shrink: 0; }
+
+    /* ─── FORM ───────────────────────────────────────────── */
+    .form-wrap {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.55s ease, opacity 0.4s ease, margin-top 0.4s ease;
+      margin-top: 0;
+    }
+    .form-wrap.open {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 2rem;
+    }
+
+    .form-grid {
+      background: var(--card);
+      border: 0.5px solid var(--sep);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+    }
+
+    .form-input {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--bg);
+      border: 0.5px solid var(--sep);
+      border-radius: 4px;
+      padding: 0.65rem 0.9rem;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--teal); }
+    .form-input::placeholder { color: var(--ink2); opacity: 0.55; }
+
+    textarea.form-input { resize: none; height: 90px; }
+
+    .form-footer {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .form-note { font-size: 11px; color: var(--ink2); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 14px;
+      color: var(--teal);
+    }
+    .form-success.show { display: block; }
+    .form-success i { font-size: 32px; display: block; margin-bottom: 0.6rem; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      padding: 1.2rem 2.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy { font-size: 10px; color: var(--ink2); }
+    .footer-copy a { color: var(--teal); }
+
+    .footer-right {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 10px;
+      color: var(--ink2);
+    }
+
+    /* ─── SCROLL REVEALS ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.18s; }
+    .reveal-d3 { transition-delay: 0.28s; }
+    .reveal-d4 { transition-delay: 0.38s; }
+
+    /* ─── REDUCED MOTION ─────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 3.5rem 1.4rem 3rem; }
+      .hero-corner { display: none; }
+      .hero-title { font-size: 36px; }
+      .section { padding: 2.2rem 1.4rem; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .case-body { grid-template-columns: 1fr; }
+      .case-meta { flex-direction: row; }
+      .contact-inner { flex-direction: column; align-items: flex-start; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .form-footer { flex-direction: column; align-items: flex-start; }
+      .nav { padding: 1rem 1.4rem; }
+      footer { padding: 1rem 1.4rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-logo">Gonz<span>Tech</span>PR</div>
+    <ul class="nav-links">
+      <li><a href="#services" data-en="Services" data-es="Servicios">Services</a></li>
+      <li><a href="#about"    data-en="About"    data-es="Acerca">About</a></li>
+      <li><a href="#work"     data-en="Work"     data-es="Proyectos">Work</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:0.7rem;">
+      <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+        <i class="ti ti-language"></i>
+        <span id="langTxt">ES</span>
+      </button>
+      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Iniciemos">Start a project</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+
+    <p class="hero-eyebrow"
+      data-en="Serious software for serious operations"
+      data-es="Software serio para operaciones que importan">
+      Serious software for serious operations
+    </p>
+
+    <h1 class="hero-title">
+      <span class="en-txt">Software strategy<br>for <span class="accent">any</span> industry.</span>
+      <span class="es-txt" style="display:none">Estrategia de software<br>para <span class="accent">cualquier</span> industria.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      <span class="en-txt">We build the system.<br>The system does the rest.</span>
+      <span class="es-txt" style="display:none">Construimos el sistema.<br>El sistema hace el resto.</span>
+    </p>
+
+    <p class="hero-body"
+      data-en="GonzalezTech builds custom software and strategy for businesses that run on real-world complexity — from the Caribbean to the Pacific Northwest."
+      data-es="GonzalezTech construye software y estrategia para negocios que operan en entornos exigentes — desde el Caribe hasta el Pacífico Noroeste.">
+      GonzalezTech builds custom software and strategy for businesses that run on real-world complexity — from the Caribbean to the Pacific Northwest.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary mag" onclick="openForm()" data-en="Start a project" data-es="Iniciemos">Start a project</button>
+      <button class="btn-ghost   mag" onclick="(function(){var navH=document.querySelector('.nav').offsetHeight;var t=document.getElementById('work').getBoundingClientRect().top+window.scrollY-navH-16;window.scrollTo({top:t,behavior:'smooth'});})()" data-en="See our work" data-es="Ver proyectos">See our work</button>
+    </div>
+
+    <div class="hero-corner" aria-hidden="true">
+      <span class="hero-corner-val" data-en="Caribbean"         data-es="Caribe">Caribbean</span>
+      <span class="hero-corner-sep">·</span>
+      <span class="hero-corner-val" data-en="Pacific Northwest"  data-es="Pacífico Noroeste">Pacific Northwest</span>
+      <span class="hero-corner-sep">·</span>
+      <span class="hero-corner-val" data-en="Service industries" data-es="Industrias de servicio">Service industries</span>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section reveal reveal-d1" id="services">
+    <div class="sec-label" data-en="What we do" data-es="Lo que hacemos">What we do</div>
+    <div class="svc-grid">
+
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-device-laptop"></i></div>
+        <div class="svc-title" data-en="Custom software"    data-es="Software a medida">Custom software</div>
+        <div class="svc-desc"  data-en="Purpose-built platforms for your operations — not templates, not shortcuts." data-es="Plataformas diseñadas para tu operación. Sin plantillas, sin atajos.">Purpose-built platforms for your operations — not templates, not shortcuts.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-chart-dots-3"></i></div>
+        <div class="svc-title" data-en="Business consulting" data-es="Consultoría">Business consulting</div>
+        <div class="svc-desc"  data-en="Strategy and systems thinking grounded in real industry experience." data-es="Estrategia y pensamiento sistémico con experiencia real de industria.">Strategy and systems thinking grounded in real industry experience.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-cpu"></i></div>
+        <div class="svc-title" data-en="Intelligent systems"  data-es="Sistemas inteligentes">Intelligent systems</div>
+        <div class="svc-desc"  data-en="Software that gets smarter the longer it runs in your operation — built from real client work, not speculation." data-es="Software que mejora con el tiempo, construido desde trabajo real con clientes.">Software that gets smarter the longer it runs in your operation — built from real client work, not speculation.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section reveal reveal-d2" id="about">
+    <div class="about-grid">
+      <div>
+        <h2 class="about-head">
+          <span class="en-txt">We go deep<br>where others <em>won't.</em></span>
+          <span class="es-txt" style="display:none">Donde otros se detienen,<br>nosotros <em>comenzamos.</em></span>
+        </h2>
+        <p class="about-body"
+          data-en="One founder. Three domain backgrounds. GonzalezTech brings engineering discipline and real industry fluency to every engagement."
+          data-es="Un fundador. Tres áreas de experiencia. GonzalezTech aporta disciplina técnica y conocimiento real de industria a cada proyecto.">
+          One founder. Three domain backgrounds. GonzalezTech brings engineering discipline and real industry fluency to every engagement.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <i class="pillar-icon ti ti-code"></i>
+          <div>
+            <div class="pillar-name" data-en="Software engineering" data-es="Ingeniería de software">Software engineering</div>
+            <div class="pillar-note" data-en="Full-stack systems built for real operations — not demos." data-es="Sistemas completos para operaciones reales, no demostraciones.">Full-stack systems built for real operations — not demos.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <i class="pillar-icon ti ti-tools-kitchen-2"></i>
+          <div>
+            <div class="pillar-name" data-en="Restaurant industry" data-es="Industria de restaurantes">Restaurant industry</div>
+            <div class="pillar-note" data-en="Firsthand ops experience — knows exactly where service businesses break." data-es="Experiencia operativa directa — sé exactamente dónde fallan los negocios de servicio.">Firsthand ops experience — knows exactly where service businesses break.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <i class="pillar-icon ti ti-atom-2"></i>
+          <div>
+            <div class="pillar-name" data-en="Systems thinking" data-es="Pensamiento sistémico">Systems thinking</div>
+            <div class="pillar-note" data-en="Trained to observe complex systems, find patterns, and solve the right problem." data-es="Entrenado para observar sistemas complejos, encontrar patrones y resolver el problema correcto.">Trained to observe complex systems, find patterns, and solve the right problem.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="section reveal reveal-d3" id="work">
+    <div class="sec-label" data-en="Current work" data-es="Proyecto actual">Current work</div>
+    <div class="case">
+      <div class="case-body">
+        <div>
+          <span class="case-badge" data-en="In progress · Puerto Rico · Marine Boatyard" data-es="En progreso · Puerto Rico · Astillero">In progress · Puerto Rico · Marine Boatyard</span>
+          <div class="case-title" data-en="Marine Boatyard operations platform" data-es="Plataforma de operaciones para astillero">Marine Boatyard operations platform</div>
+          <div class="case-desc"  data-en="Job tracking, customer notifications, and inventory for a 10-person boatyard. Architected as a multi-tenant Caribbean marine platform from day one." data-es="Seguimiento de trabajos, notificaciones y control de inventario para un astillero de 10 personas. Arquitectura multi-tenant desde el primer día.">Job tracking, customer notifications, and inventory for a 10-person boatyard. Architected as a multi-tenant Caribbean marine platform from day one.</div>
+        </div>
+        <div class="case-meta">
+          <div class="meta">
+            <span class="meta-val" data-en="In progress" data-es="En progreso">In progress</span>
+            <span class="meta-key" data-en="Status" data-es="Estado">Status</span>
+          </div>
+          <div class="meta">
+            <span class="meta-val">PR</span>
+            <span class="meta-key" data-en="Location" data-es="Ubicación">Location</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section reveal reveal-d4" id="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="contact-hed">
+          <span class="en-txt">Let's build<br>something <span>together.</span></span>
+          <span class="es-txt" style="display:none">Construyamos<br>algo <span>juntos.</span></span>
+        </div>
+        <div class="contact-sub"
+          data-en="Direct line to the person doing the work."
+          data-es="Línea directa con quien hace el trabajo.">
+          Direct line to the person doing the work.
+        </div>
+      </div>
+      <div class="contact-actions">
+        <button class="btn-ghost   mag" onclick="openForm()" data-en="See intake form" data-es="Ver formulario">See intake form</button>
+        <button class="btn-primary mag" onclick="openForm()" data-en="Get in touch ↗"  data-es="Escríbenos ↗">Get in touch ↗</button>
+      </div>
+    </div>
+
+    <!-- Inline form -->
+    <div class="form-wrap" id="formWrap">
+      <div class="form-grid" id="contactForm">
+        <div class="form-group">
+          <label class="form-label" for="fname" data-en="Your name" data-es="Tu nombre">Your name</label>
+          <input class="form-input" id="fname" type="text" placeholder="Alfonso González" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="femail" data-en="Your email" data-es="Tu email">Your email</label>
+          <input class="form-input" id="femail" type="email" placeholder="you@company.com" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="fmessage" data-en="What are you working on?" data-es="¿En qué estás trabajando?">What are you working on?</label>
+          <textarea class="form-input" id="fmessage" placeholder="Tell us about your project..."></textarea>
+        </div>
+        <div class="form-footer full">
+          <span class="form-note" data-en="We'll get back to you within one business day." data-es="Te respondemos en un día hábil.">We'll get back to you within one business day.</span>
+          <div style="display:flex;gap:0.7rem;align-items:center;">
+            <button class="btn-ghost" onclick="closeForm()" data-en="Cancel" data-es="Cancelar">Cancel</button>
+            <button class="btn-primary mag" onclick="submitForm()" data-en="Send message ↗" data-es="Enviar ↗">Send message ↗</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <i class="ti ti-circle-check"></i>
+        <span data-en="Message sent — we'll be in touch soon." data-es="Mensaje enviado — te contactamos pronto.">Message sent — we'll be in touch soon.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-copy">© 2025 GonzalezTech LLC · <a href="mailto:hola@gonztechpr.com">hola@gonztechpr.com</a></span>
+    <div class="footer-right">
+      <span>Caribbean</span>
+      <span>Pacific Northwest</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Language toggle ──────────────────────────────────────
+    var isES = false;
+
+    function toggleLang() {
+      isES = !isES;
+      document.getElementById('langTxt').textContent = isES ? 'EN' : 'ES';
+      document.documentElement.lang = isES ? 'es' : 'en';
+
+      document.querySelectorAll('[data-en]').forEach(function(el) {
+        el.innerHTML = isES
+          ? (el.getAttribute('data-es') || el.innerHTML)
+          : (el.getAttribute('data-en') || el.innerHTML);
+      });
+      document.querySelectorAll('.en-txt').forEach(function(el) { el.style.display = isES ? 'none' : ''; });
+      document.querySelectorAll('.es-txt').forEach(function(el) { el.style.display = isES ? ''     : 'none'; });
+    }
+
+    // ── Magnetic buttons ─────────────────────────────────────
+    function initMagnetic() {
+      document.querySelectorAll('.mag').forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          var r  = btn.getBoundingClientRect();
+          var dx = e.clientX - (r.left + r.width  / 2);
+          var dy = e.clientY - (r.top  + r.height / 2);
+          btn.style.transform = 'translate(' + (dx * 0.22) + 'px,' + (dy * 0.22) + 'px)';
+        });
+        btn.addEventListener('mouseleave', function() { btn.style.transform = ''; });
+      });
+    }
+    initMagnetic();
+
+    // ── Nav-offset scroll (accounts for sticky nav height) ──
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        var navH = document.querySelector('.nav').offsetHeight;
+        var top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+
+    // ── Scroll reveals ───────────────────────────────────────
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    // ── Contact form ─────────────────────────────────────────
+    // Form only ever opens via CTA buttons — never toggles closed from them.
+    // Only the explicit close button dismisses it.
+    var formOpen = false;
+
+    function openForm() {
+      if (!formOpen) {
+        formOpen = true;
+        document.getElementById('formWrap').classList.add('open');
+      }
+      // Always scroll to form whether it was already open or just opened
+      setTimeout(function() {
+        var navH  = document.querySelector('.nav').offsetHeight;
+        var wrap  = document.getElementById('formWrap');
+        var top   = wrap.getBoundingClientRect().top + window.scrollY - navH - 24;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 80);
+    }
+
+    function closeForm() {
+      formOpen = false;
+      document.getElementById('formWrap').classList.remove('open');
+    }
+
+    async function submitForm() {
+      var name    = document.getElementById('fname').value.trim();
+      var email   = document.getElementById('femail').value.trim();
+      var message = document.getElementById('fmessage').value.trim();
+
+      if (!name || !email || !message) {
+        alert(isES ? 'Por favor completa todos los campos.' : 'Please fill in all fields.');
+        return;
+      }
+
+      try {
+        var res = await fetch('https://formspree.io/f/mqeryqye', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, message: message })
+        });
+
+        if (res.ok) {
+          document.getElementById('contactForm').style.display = 'none';
+          document.getElementById('formSuccess').classList.add('show');
+        } else {
+          alert(isES
+            ? 'Algo salió mal. Escríbenos a hola@gonztechpr.com'
+            : 'Something went wrong. Please email hola@gonztechpr.com directly.');
+        }
+      } catch (err) {
+        alert(isES
+          ? 'Algo salió mal. Escríbenos a hola@gonztechpr.com'
+          : 'Something went wrong. Please email hola@gonztechpr.com directly.');
+      }
+    }
+  </script>
+
+</body>
+</html>
